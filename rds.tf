@@ -1,3 +1,4 @@
+# Create a subnet group to use with the RDS instance
 resource "aws_db_subnet_group" "rdf_db_subnet_grp" {
   name        = "rdf rds subnet group"
   description = "RDF Wordpress RDS DB subnet group"
@@ -9,6 +10,7 @@ resource "aws_db_subnet_group" "rdf_db_subnet_grp" {
 }
 
 
+#Create an RDS instance that will be used to host the Wordpress database
 resource "aws_db_instance" "rdf_rds_instance" {
   allocated_storage      = 20
   identifier             = sensitive(var.dbname)

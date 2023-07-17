@@ -1,3 +1,4 @@
+# Create a security group to allow SSH, http and https traffic to the ec2 web server
 resource "aws_security_group" "rdf_web_server_sg" {
   name        = "rdf_web_server_SG"
   description = "Allow ssh and http"
@@ -40,6 +41,7 @@ resource "aws_security_group" "rdf_web_server_sg" {
   }
 }
 
+# Create a security group for the RDS database that only accepts incoming requests from the ec2 security group
 resource "aws_security_group" "rdf_rds_sg" {
   name   = "RDF_RDS_SG"
   vpc_id = aws_vpc.rdf_vpc.id

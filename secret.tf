@@ -1,3 +1,4 @@
+#Create 2 new secrets in AWS secrets manager for the root databsae and primary wordpress user credentials
 resource "aws_secretsmanager_secret" "DB_admin_creds" {
   name        = "RDF_WordPress_RDS_DBadmin"
   description = "Admin credentials for RDF RDS MySQL Wordpress DB"

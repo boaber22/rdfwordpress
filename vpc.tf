@@ -1,3 +1,4 @@
+# Create a new VPC
 resource "aws_vpc" "rdf_vpc" {
   cidr_block           = "192.168.0.0/16"
   instance_tenancy     = "default"
@@ -9,7 +10,7 @@ resource "aws_vpc" "rdf_vpc" {
   }
 }
 
-
+#Create an Internet Gateway
 resource "aws_internet_gateway" "rdf_igw" {
   vpc_id = aws_vpc.rdf_vpc.id
 
@@ -19,6 +20,7 @@ resource "aws_internet_gateway" "rdf_igw" {
   }
 }
 
+# Create a public subnet for the ec2 web server
 resource "aws_subnet" "rdf_public_web" {
   vpc_id                  = aws_vpc.rdf_vpc.id
   cidr_block              = "192.168.1.0/24"
@@ -30,6 +32,7 @@ resource "aws_subnet" "rdf_public_web" {
   }
 }
 
+# Create 2 private subnets for the RDS subnet group and database
 resource "aws_subnet" "rdf_private_sn_1" {
   vpc_id            = aws_vpc.rdf_vpc.id
   cidr_block        = "192.168.2.0/24"
@@ -52,6 +55,7 @@ resource "aws_subnet" "rdf_private_sn_2" {
   }
 }
 
+# Create a new route table for internet access on the public subnet
 resource "aws_route_table" "rdf_rt" {
   vpc_id = aws_vpc.rdf_vpc.id
 
@@ -66,6 +70,7 @@ resource "aws_route_table" "rdf_rt" {
   }
 }
 
+# Associate the new route table with the public subnet
 resource "aws_route_table_association" "public_subnet_asso" {
   subnet_id      = aws_subnet.rdf_public_web.id
   route_table_id = aws_route_table.rdf_rt.id
