@@ -32,3 +32,7 @@ variable "dbuserun" {
 variable "dbuserpw" {
   type = string
 }
+
+variable "myip" {
+  type = string
+}

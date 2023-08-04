@@ -5,11 +5,11 @@ resource "aws_security_group" "rdf_web_server_sg" {
   vpc_id      = aws_vpc.rdf_vpc.id
 
   ingress {
-    description = "SSH from anywhere"
+    description = "SSH from my IP"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [var.myip]
   }
 
   ingress {
