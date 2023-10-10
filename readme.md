@@ -1,2 +1,2 @@
 # rdfwordpress
-TF code used to build AWS infrastructure for Robert Does Fishing Wordpress web server and RDS instance
+Terraform code used to build AWS infrastructure for my "Robert Does Fishing" Wordpress web server and RDS instance
