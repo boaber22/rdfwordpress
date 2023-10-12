@@ -6,6 +6,7 @@ db_wp_username=${db_wp_username}
 db_wp_password=${db_wp_password}
 db_name=${db_name}
 db_RDS=${db_RDS}
+
 # install LAMP Server
 yum update -y
 #install apache server and mysql client
@@ -29,9 +30,7 @@ amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
 yum clean metadata
 yum install -y php php-{pear,cgi,common,curl,mbstring,gd,mysqlnd,gettext,bcmath,json,xml,fpm,intl,zip,imap,devel}
 
-
 systemctl restart php-fpm.service
-
 
 systemctl start httpd
 
@@ -43,7 +42,7 @@ find /var/www -type d -exec chmod 2775 {} \;
 find /var/www -type f -exec chmod 0664 {} \;
 
 
-#**********************Installing Wordpress manually********************************* 
+#**********************Installing Wordpress ********************************* 
 # Download wordpress package and extract
 wget https://wordpress.org/latest.tar.gz
 tar -xzf latest.tar.gz
@@ -59,18 +58,6 @@ cat <<EOF >>/var/www/html/wp-config.php
 define( 'FS_METHOD', 'direct' );
 define('WP_MEMORY_LIMIT', '128M');
 EOF
-
-##**********************Installing Wordpress using WP CLI********************************* 
-#curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-#chmod +x wp-cli.phar
-#mv wp-cli.phar /usr/local/bin/wp
-#wp core download --path=/var/www/html --allow-root
-#wp config create --dbname=$db_name --dbuser=$db_username --dbpass=$db_user_password --dbhost=$db_RDS --path=/var/www/html --allow-root --extra-php <<PHP
-#define( 'FS_METHOD', 'direct' );
-#define('WP_MEMORY_LIMIT', '128M');
-#PHP
-
-
 
 
 # Change permission of /var/www/html/
