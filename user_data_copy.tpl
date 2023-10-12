@@ -7,7 +7,7 @@ db_wp_password=${db_wp_password}
 db_name=${db_name}
 db_RDS=${db_RDS}
 
-# install LAMP Server
+# *****************install LAMP Server***************************
 yum update -y
 #install apache server and mysql client
 yum install -y httpd
